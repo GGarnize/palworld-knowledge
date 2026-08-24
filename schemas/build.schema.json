@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://palworld-knowledge-poc/schemas/build.schema.json",
+  "title": "Build",
+  "description": "data/build.json - build metadata produced by the build-metadata command: extractor identity, per-dataset row counts/hashes, the validate-data summary for this build, and an optional comparison against a previous build.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["steamBuildId", "generatedAtUtc", "extractor", "datasets", "validation", "previousBuildComparison"],
+  "properties": {
+    "steamBuildId": { "type": "string", "minLength": 1 },
+    "gameVersion": { "type": "string", "minLength": 1 },
+    "generatedAtUtc": { "type": "string", "format": "date-time" },
+    "extractor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "datasets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pals", "passiveSkills", "partnerSkills", "gameSettings"],
+      "properties": {
+        "pals": { "$ref": "#/$defs/arrayDataset" },
+        "passiveSkills": { "$ref": "#/$defs/arrayDataset" },
+        "partnerSkills": { "$ref": "#/$defs/arrayDataset" },
+        "gameSettings": { "$ref": "#/$defs/objectDataset" }
+      }
+    },
+    "validation": {
+      "description": "The validate-data result (DataValidator) for the datasets this build.json describes - never recomputed differently here.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["errors", "warnings"],
+      "properties": {
+        "errors": { "type": "integer", "minimum": 0 },
+        "warnings": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "previousBuildComparison": { "$ref": "#/$defs/previousBuildComparison" }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "arrayDataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "rows", "sha256"],
+      "properties": {
+        "file": { "type": "string", "minLength": 1 },
+        "rows": { "type": "integer", "minimum": 0 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "objectDataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "sha256"],
+      "properties": {
+        "file": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "previousBuildComparison": {
+      "description": "available=false whenever --previous-build was not supplied, was unreadable, or lacked a 'datasets' section - never a hard error by itself (see 'issue').",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available"],
+      "properties": {
+        "available": { "type": "boolean" },
+        "issue": { "type": "string", "minLength": 1 },
+        "previousBuildId": { "type": "string", "minLength": 1 },
+        "previousGeneratedAtUtc": { "type": "string", "minLength": 1 },
+        "datasets": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/datasetComparison" }
+        },
+        "changedDatasets": {
+          "description": "Dataset keys whose sha256 differs from the previous build. A count/row change alone does not imply a hash change and vice versa.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "riskWarnings": {
+          "description": "Non-blocking anomaly notes (e.g. an abnormal row-count drop) - never causes build-metadata to fail.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "datasetComparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available"],
+      "properties": {
+        "available": {
+          "type": "boolean",
+          "description": "false when this dataset key was not present in the previous build.json - nothing else in this object is meaningful then."
+        },
+        "previousRows": { "type": "integer", "minimum": 0 },
+        "currentRows": { "type": "integer", "minimum": 0 },
+        "delta": { "type": "integer" },
+        "deltaPercent": { "type": "number" },
+        "hashChanged": { "type": "boolean" }
+      }
+    }
+  }
+}

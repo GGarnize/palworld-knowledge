@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://palworld-knowledge-poc/schemas/game-settings.schema.json",
+  "title": "GameSettings",
+  "description": "data/game-settings.json - single normalized object combining PAK-blueprint fields with optional runtime evidence. Not an array.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["workSuitability", "workHard", "runtimeEvidence"],
+  "properties": {
+    "workSuitability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceKind", "source", "maxRank", "craftSpeedByType", "transportItemAbsorbRangeByRank"],
+      "properties": {
+        "sourceKind": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "maxRank": { "type": "integer", "minimum": 1 },
+        "craftSpeedByType": {
+          "type": "object",
+          "description": "Keyed by work-suitability type (EmitFlame, Watering, ...). Keys are game content, not fixed structurally.",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "number" }
+          }
+        },
+        "transportItemAbsorbRangeByRank": {
+          "type": "array",
+          "items": { "type": "number" }
+        }
+      }
+    },
+    "workHard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceKind", "source", "sourceProperty", "modes"],
+      "properties": {
+        "sourceKind": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "sourceProperty": { "type": "string", "minLength": 1 },
+        "modes": {
+          "type": "object",
+          "description": "Keyed by base-camp work-hard mode name, read directly from BaseCampPassiveEffectWorkHardInfoMap - not a fixed enum, the game can add/rename modes.",
+          "additionalProperties": { "$ref": "#/$defs/workHardMode" }
+        }
+      }
+    },
+    "transport": {
+      "description": "Present only when normalize-game-settings was run with --runtime-evidence (nothing here comes from the PAK).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["globalSpeedRateSourceKind", "debugConfirmationSpeedMultipleRateSourceKind"],
+      "properties": {
+        "globalSpeedRate": { "type": "number" },
+        "globalSpeedRateSourceKind": { "type": "string", "minLength": 1 },
+        "globalSpeedRateSource": { "type": "string", "minLength": 1 },
+        "baseSpeedTypeEvidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "value": { "type": "string", "minLength": 1 },
+            "enumValue": { "type": "integer" },
+            "sourceKind": { "type": "string", "minLength": 1 },
+            "source": { "type": "string", "minLength": 1 },
+            "confidence": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Free-text evidence-confidence label (e.g. 'high'). Not proof the underlying formula is correct - see 'note'."
+            },
+            "note": { "type": "string", "minLength": 1 }
+          }
+        },
+        "debugConfirmationSpeedMultipleRate": { "type": "number" },
+        "debugConfirmationSpeedMultipleRateSourceKind": { "type": "string", "minLength": 1 }
+      }
+    },
+    "runtimeEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applied"],
+      "properties": {
+        "applied": { "type": "boolean" },
+        "file": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "$defs": {
+    "workHardMode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workSpeedRate", "moveSpeedRate", "affectSanityRate", "decreaseFullStomachRate"],
+      "properties": {
+        "workSpeedRate": { "type": "number" },
+        "moveSpeedRate": { "type": "number" },
+        "affectSanityRate": { "type": "number" },
+        "decreaseFullStomachRate": { "type": "number" }
+      }
+    }
+  }
+}

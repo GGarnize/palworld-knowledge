@@ -1,0 +1,23 @@
+{
+  "workSuitability": {
+    "sourceKind": "pak-blueprint",
+    "source": "Test/Path",
+    "maxRank": 10,
+    "craftSpeedByType": { "Handcraft": [0, 50] },
+    "transportItemAbsorbRangeByRank": [0, 100]
+  },
+  "workHard": {
+    "sourceKind": "pak-blueprint",
+    "source": "Test/Path",
+    "sourceProperty": "TestProperty",
+    "modes": {
+      "normal": {
+        "workSpeedRate": 1,
+        "moveSpeedRate": 1,
+        "affectSanityRate": 0,
+        "decreaseFullStomachRate": 1
+      }
+    }
+  },
+  "runtimeEvidence": { "applied": false }
+}

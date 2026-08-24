@@ -1,0 +1,254 @@
+{
+  "workSuitability": {
+    "sourceKind": "pak-blueprint",
+    "source": "Pal/Content/Pal/Blueprint/System/BP_PalGameSetting",
+    "maxRank": 10,
+    "craftSpeedByType": {
+      "EmitFlame": [
+        0,
+        50,
+        80,
+        140,
+        240,
+        400,
+        680,
+        1100,
+        1900,
+        3200,
+        5400
+      ],
+      "Watering": [
+        0,
+        50,
+        70,
+        100,
+        140,
+        190,
+        260,
+        370,
+        510,
+        720,
+        1000
+      ],
+      "Seeding": [
+        0,
+        50,
+        70,
+        100,
+        140,
+        190,
+        260,
+        370,
+        510,
+        720,
+        1000
+      ],
+      "GenerateElectricity": [
+        0,
+        250,
+        325,
+        400,
+        500,
+        750,
+        1000,
+        1500,
+        2000,
+        3000,
+        4000
+      ],
+      "Handcraft": [
+        0,
+        50,
+        80,
+        140,
+        240,
+        400,
+        680,
+        1100,
+        1900,
+        3200,
+        5400
+      ],
+      "OilExtraction": [
+        0,
+        50,
+        70,
+        100,
+        140,
+        190,
+        260,
+        370,
+        510,
+        720,
+        1000
+      ],
+      "ProductMedicine": [
+        0,
+        50,
+        80,
+        140,
+        240,
+        400,
+        680,
+        1100,
+        1900,
+        3200,
+        5400
+      ],
+      "Anyone": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "Transport": [
+        0,
+        2,
+        5,
+        10,
+        20,
+        40,
+        70,
+        120,
+        200,
+        320,
+        500
+      ],
+      "Cool": [
+        0,
+        50,
+        80,
+        140,
+        240,
+        400,
+        680,
+        1100,
+        1900,
+        3200,
+        5400
+      ],
+      "MonsterFarm": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30
+      ],
+      "Collection": [
+        0,
+        50,
+        70,
+        100,
+        140,
+        190,
+        260,
+        370,
+        510,
+        720,
+        1000
+      ],
+      "Deforest": [
+        0,
+        50,
+        70,
+        100,
+        140,
+        190,
+        260,
+        370,
+        510,
+        720,
+        1000
+      ],
+      "Mining": [
+        0,
+        50,
+        70,
+        100,
+        140,
+        190,
+        260,
+        370,
+        510,
+        720,
+        1000
+      ]
+    },
+    "transportItemAbsorbRangeByRank": [
+      0,
+      0,
+      0,
+      0,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      1000
+    ]
+  },
+  "workHard": {
+    "sourceKind": "pak-blueprint",
+    "source": "Pal/Content/Pal/Blueprint/System/BP_PalGameSetting",
+    "sourceProperty": "BaseCampPassiveEffectWorkHardInfoMap",
+    "modes": {
+      "veryHard": {
+        "workSpeedRate": 1.5,
+        "moveSpeedRate": 1.5,
+        "affectSanityRate": -0.20000000298023224,
+        "decreaseFullStomachRate": 1.5
+      },
+      "hard": {
+        "workSpeedRate": 1.25,
+        "moveSpeedRate": 1.25,
+        "affectSanityRate": -0.10000000149011612,
+        "decreaseFullStomachRate": 1.25
+      },
+      "normal": {
+        "workSpeedRate": 1,
+        "moveSpeedRate": 1,
+        "affectSanityRate": 0,
+        "decreaseFullStomachRate": 1
+      },
+      "easy": {
+        "workSpeedRate": 0.699999988079071,
+        "moveSpeedRate": 1,
+        "affectSanityRate": 0.07999999821186066,
+        "decreaseFullStomachRate": 0.800000011920929
+      }
+    }
+  },
+  "transport": {
+    "globalSpeedRate": 0.5,
+    "globalSpeedRateSourceKind": "runtime-cdo",
+    "globalSpeedRateSource": "/Script/Pal.Default__PalGameSetting",
+    "baseSpeedTypeEvidence": {
+      "value": "Run",
+      "enumValue": 2,
+      "sourceKind": "debug-runtime-cdo",
+      "source": "/Script/Pal.Default__PalDebugSetting",
+      "confidence": "high",
+      "note": "Developer transport validation setting; runtime formula body not decompiled. Evidence only, not proof of the WorkTransportingSpeedRate formula."
+    },
+    "debugConfirmationSpeedMultipleRate": 1,
+    "debugConfirmationSpeedMultipleRateSourceKind": "debug-runtime-cdo"
+  },
+  "runtimeEvidence": {
+    "applied": true,
+    "file": "C:\\Repos\\palworld-knowledge-poc\\config\\runtime-evidence.json"
+  }
+}

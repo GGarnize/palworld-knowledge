@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://palworld-knowledge-poc/schemas/pal.schema.json",
+  "title": "Pal",
+  "description": "data/pals.json - array of normalized Pal rows from DT_PalMonsterParameter.",
+  "type": "array",
+  "items": { "$ref": "#/$defs/pal" },
+  "$defs": {
+    "pal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "tribe",
+        "localization",
+        "name",
+        "paldexNumber",
+        "rarity",
+        "isPal",
+        "bpClass",
+        "variant",
+        "behavior",
+        "movement",
+        "workSuitability",
+        "naturalPassives",
+        "source"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "tribe": { "type": "string", "minLength": 1 },
+        "localization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["nameId"],
+          "properties": {
+            "nameId": { "type": "string", "minLength": 1 }
+          }
+        },
+        "name": { "$ref": "#/$defs/localizedText" },
+        "paldexNumber": { "type": "integer" },
+        "zukanIndexSuffix": { "type": "string", "minLength": 1 },
+        "rarity": { "type": "integer" },
+        "isPal": { "type": "boolean" },
+        "bpClass": { "type": "string", "minLength": 1 },
+        "variant": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "isBoss",
+            "isTowerBoss",
+            "isRaidBoss",
+            "isTechnicalVariant",
+            "recommendationEligible"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": ["normal", "boss", "towerBoss", "raidBoss", "technical", "unknown"]
+            },
+            "isBoss": { "type": "boolean" },
+            "isTowerBoss": { "type": "boolean" },
+            "isRaidBoss": { "type": "boolean" },
+            "isTechnicalVariant": { "type": "boolean" },
+            "recommendationEligible": { "type": "boolean" }
+          }
+        },
+        "behavior": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["nocturnal"],
+          "properties": {
+            "nocturnal": { "type": "boolean" }
+          }
+        },
+        "movement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "slowWalkSpeed",
+            "walkSpeed",
+            "runSpeed",
+            "transportSpeed",
+            "rideSprintSpeed",
+            "swimSpeed",
+            "swimDashSpeed"
+          ],
+          "properties": {
+            "slowWalkSpeed": { "type": "number" },
+            "walkSpeed": { "type": "number" },
+            "runSpeed": { "type": "number" },
+            "transportSpeed": { "type": "number" },
+            "rideSprintSpeed": { "type": "number" },
+            "swimSpeed": { "type": "number" },
+            "swimDashSpeed": { "type": "number" }
+          }
+        },
+        "bestWorkSuitability": { "type": "string", "minLength": 1 },
+        "workSuitability": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        },
+        "naturalPassives": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "partnerSkillId": { "type": "string", "minLength": 1 },
+        "source": { "$ref": "#/$defs/source" }
+      }
+    },
+    "localizedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ptBR": { "type": "string", "minLength": 1 },
+        "enUS": { "type": "string", "minLength": 1 }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["table", "row"],
+      "properties": {
+        "table": { "type": "string", "minLength": 1 },
+        "row": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

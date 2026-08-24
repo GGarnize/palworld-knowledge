@@ -1,0 +1,48 @@
+{
+  "evidenceFor": {
+    "steamBuildId": null,
+    "gameVersion": null,
+    "capturedAtUtc": null,
+    "source": "UE4SS runtime CDO",
+    "compatibility": "unverified",
+    "note": "This file's palGameSetting/palDebugSetting values were hand-captured via UE4SS at some point in this project's history, but no build ID or timestamp was recorded at capture time and none can be reconstructed now. steamBuildId is intentionally null rather than guessed. scripts/normalize-all.sh only passes --runtime-evidence through to normalize-game-settings when steamBuildId here matches the build currently being processed - since it's null, that never happens automatically, and game-settings.json will omit 'transport' until a human re-verifies these values against a specific build (via UE4SS) and sets steamBuildId (and ideally gameVersion/capturedAtUtc/compatibility) accordingly."
+  },
+  "palGameSetting": {
+    "workTransportingSpeedRate": {
+      "value": 0.5,
+      "sourceKind": "runtime-cdo",
+      "source": "/Script/Pal.Default__PalGameSetting",
+      "note": "Not serialized in the BP_PalGameSetting blueprint asset; observed on the native runtime CDO via UE4SS."
+    }
+  },
+  "palDebugSetting": {
+    "confirmTransportItemBaseSpeedType": {
+      "enumValue": 2,
+      "value": "Run",
+      "sourceKind": "debug-runtime-cdo",
+      "source": "/Script/Pal.Default__PalDebugSetting",
+      "confidence": "high",
+      "note": "Developer transport validation setting; runtime formula body not decompiled. Evidence only, not proof of the WorkTransportingSpeedRate formula."
+    },
+    "confirmTransportItemSpeedMultipleRate": {
+      "value": 1.0,
+      "sourceKind": "debug-runtime-cdo",
+      "source": "/Script/Pal.Default__PalDebugSetting"
+    },
+    "bForceRunInWork": {
+      "value": false,
+      "sourceKind": "debug-runtime-cdo",
+      "source": "/Script/Pal.Default__PalDebugSetting"
+    },
+    "bContinueSpeedInTransportWork": {
+      "value": false,
+      "sourceKind": "debug-runtime-cdo",
+      "source": "/Script/Pal.Default__PalDebugSetting"
+    },
+    "bNotInterruptTransportingWork": {
+      "value": false,
+      "sourceKind": "debug-runtime-cdo",
+      "source": "/Script/Pal.Default__PalDebugSetting"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+[
+  {
+    "id": "TestPal1",
+    "tribe": "TestPal1",
+    "localization": { "nameId": "PAL_NAME_TestPal1" },
+    "name": { "ptBR": "TestePal1", "enUS": "TestPal1" },
+    "paldexNumber": 1,
+    "rarity": 1,
+    "isPal": true,
+    "bpClass": "TestPal1",
+    "variant": {
+      "kind": "normal",
+      "isBoss": false,
+      "isTowerBoss": false,
+      "isRaidBoss": false,
+      "isTechnicalVariant": false,
+      "recommendationEligible": true
+    },
+    "behavior": { "nocturnal": false },
+    "movement": {
+      "slowWalkSpeed": 100,
+      "walkSpeed": 200,
+      "runSpeed": 400,
+      "transportSpeed": 300,
+      "rideSprintSpeed": 500,
+      "swimSpeed": 400,
+      "swimDashSpeed": 400
+    },
+    "workSuitability": { "Handcraft": 2 },
+    "naturalPassives": ["DoesNotExist"],
+    "partnerSkillId": "TestPal1",
+    "source": { "table": "DT_PalMonsterParameter", "row": "TestPal1" }
+  },
+  {
+    "id": "BOSS_TestPal1",
+    "tribe": "TestPal1",
+    "localization": { "nameId": "PAL_NAME_TestPal1" },
+    "name": { "ptBR": "TestePal1 Chefe", "enUS": "TestPal1 Boss" },
+    "paldexNumber": -1,
+    "rarity": 5,
+    "isPal": true,
+    "bpClass": "BOSS_TestPal1",
+    "variant": {
+      "kind": "boss",
+      "isBoss": true,
+      "isTowerBoss": false,
+      "isRaidBoss": false,
+      "isTechnicalVariant": false,
+      "recommendationEligible": false
+    },
+    "behavior": { "nocturnal": false },
+    "movement": {
+      "slowWalkSpeed": 100,
+      "walkSpeed": 200,
+      "runSpeed": 400,
+      "transportSpeed": 300,
+      "rideSprintSpeed": 500,
+      "swimSpeed": 400,
+      "swimDashSpeed": 400
+    },
+    "workSuitability": {},
+    "naturalPassives": [],
+    "source": { "table": "DT_PalMonsterParameter", "row": "BOSS_TestPal1" }
+  }
+]

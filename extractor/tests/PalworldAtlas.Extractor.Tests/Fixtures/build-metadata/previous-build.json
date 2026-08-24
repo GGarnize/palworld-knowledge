@@ -1,0 +1,37 @@
+{
+  "steamBuildId": "11111111",
+  "gameVersion": "0.9.9.0",
+  "generatedAtUtc": "2026-01-01T00:00:00.0000000Z",
+  "extractor": {
+    "name": "PalworldAtlas.Extractor",
+    "version": "0.9.0"
+  },
+  "datasets": {
+    "pals": {
+      "file": "pals.json",
+      "rows": 1,
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "passiveSkills": {
+      "file": "passive-skills.json",
+      "rows": 2,
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "partnerSkills": {
+      "file": "partner-skills.json",
+      "rows": 20,
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    "gameSettings": {
+      "file": "game-settings.json",
+      "sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+    }
+  },
+  "validation": {
+    "errors": 0,
+    "warnings": 3
+  },
+  "previousBuildComparison": {
+    "available": false
+  }
+}

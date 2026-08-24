@@ -1,0 +1,35 @@
+[
+  {
+    "palId": "TestPal1",
+    "restrictionItems": [],
+    "ranks": [
+      {
+        "rank": 1,
+        "passiveSkills": [
+          {
+            "id": "TestPassive2",
+            "effects": [],
+            "activation": {
+              "always": false,
+              "worker": true,
+              "baseCamp": true,
+              "otomo": false,
+              "activeOtomo": false,
+              "reserve": false,
+              "riding": false
+            },
+            "parameters": {
+              "delayTime": 0,
+              "assignIgnoreCurrentWorkType": false,
+              "assignOthers": false,
+              "notAssignSelf": false,
+              "floatValue1": 0
+            }
+          }
+        ]
+      }
+    ],
+    "baseCampRelevant": false,
+    "source": { "table": "DT_PartnerSkillParameter", "row": "TestPal1" }
+  }
+]

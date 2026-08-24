@@ -1,0 +1,71 @@
+{
+  "steamBuildId": "18471077",
+  "gameVersion": "1.0.3.101283",
+  "generatedAtUtc": "2026-08-24T17:13:14.3266359Z",
+  "extractor": {
+    "name": "PalworldAtlas.Extractor",
+    "version": "1.0.0\u002Badd14423f623c45836ed31f4a180c2adfa8b0ab7"
+  },
+  "datasets": {
+    "pals": {
+      "file": "pals.json",
+      "rows": 753,
+      "sha256": "0b70a165c2758cf532890e175bec38f2d6b108b64173f6e028ad1dfd49c22bce"
+    },
+    "passiveSkills": {
+      "file": "passive-skills.json",
+      "rows": 1905,
+      "sha256": "9cf0f5a35fb9d7874caa27305c9f3ce7a0e71b727858095308c8ccc84f654255"
+    },
+    "partnerSkills": {
+      "file": "partner-skills.json",
+      "rows": 682,
+      "sha256": "80e217599b4ed8a06f92e4fbd382357f97532fc55e71a9b986e0aa06162c632f"
+    },
+    "gameSettings": {
+      "file": "game-settings.json",
+      "sha256": "1b136b379975def619ab62d34c249286b37e722493a9b052aae0890790e0b495"
+    }
+  },
+  "validation": {
+    "errors": 0,
+    "warnings": 78
+  },
+  "previousBuildComparison": {
+    "available": true,
+    "previousBuildId": "18471077",
+    "previousGeneratedAtUtc": "2026-08-24T17:05:33.4456809Z",
+    "datasets": {
+      "pals": {
+        "available": true,
+        "previousRows": 753,
+        "currentRows": 753,
+        "delta": 0,
+        "deltaPercent": 0,
+        "hashChanged": false
+      },
+      "passiveSkills": {
+        "available": true,
+        "previousRows": 1905,
+        "currentRows": 1905,
+        "delta": 0,
+        "deltaPercent": 0,
+        "hashChanged": false
+      },
+      "partnerSkills": {
+        "available": true,
+        "previousRows": 682,
+        "currentRows": 682,
+        "delta": 0,
+        "deltaPercent": 0,
+        "hashChanged": false
+      },
+      "gameSettings": {
+        "available": true,
+        "hashChanged": false
+      }
+    },
+    "changedDatasets": [],
+    "riskWarnings": []
+  }
+}

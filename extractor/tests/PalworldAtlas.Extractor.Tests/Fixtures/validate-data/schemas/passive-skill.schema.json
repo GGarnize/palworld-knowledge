@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://palworld-knowledge-poc/schemas/passive-skill.schema.json",
+  "title": "PassiveSkill",
+  "description": "data/passive-skills.json - array of normalized rows from DT_PassiveSkill_Main. Internal/non-displayable skills (category=SortNotDisplayable) are kept, not filtered.",
+  "type": "array",
+  "items": { "$ref": "#/$defs/passiveSkill" },
+  "$defs": {
+    "passiveSkill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "localization",
+        "name",
+        "description",
+        "category",
+        "rank",
+        "lotteryWeight",
+        "availability",
+        "activation",
+        "stackablePartnerSkillBySameTribe",
+        "effects"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "localization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["nameId", "descriptionId"],
+          "properties": {
+            "nameId": { "type": "string", "minLength": 1 },
+            "descriptionId": { "type": "string", "minLength": 1 }
+          }
+        },
+        "name": { "$ref": "#/$defs/localizedText" },
+        "description": { "$ref": "#/$defs/localizedText" },
+        "category": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Known values today: SortDisplayable, SortNotDisplayable. Not restricted to an enum - the game can introduce new sort categories."
+        },
+        "rank": { "type": "integer" },
+        "lotteryWeight": { "type": "integer" },
+        "targetElement": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Element type this skill's effect is scoped to (e.g. PartnerSkill_<Element>_N rows). Omitted when the underlying enum is None."
+        },
+        "availability": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "pal",
+            "rarePal",
+            "mutationPal",
+            "worldTreePal",
+            "accessory",
+            "armor",
+            "meleeWeapon",
+            "shotWeapon"
+          ],
+          "properties": {
+            "pal": { "type": "boolean" },
+            "rarePal": { "type": "boolean" },
+            "mutationPal": { "type": "boolean" },
+            "worldTreePal": { "type": "boolean" },
+            "accessory": { "type": "boolean" },
+            "armor": { "type": "boolean" },
+            "meleeWeapon": { "type": "boolean" },
+            "shotWeapon": { "type": "boolean" }
+          }
+        },
+        "activation": { "$ref": "#/$defs/activation" },
+        "stackablePartnerSkillBySameTribe": { "type": "boolean" },
+        "effects": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/effect" }
+        }
+      }
+    },
+    "localizedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ptBR": { "type": "string", "minLength": 1 },
+        "enUS": { "type": "string", "minLength": 1 }
+      }
+    },
+    "activation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["always", "worker", "baseCamp", "otomo", "activeOtomo", "reserve", "riding"],
+      "properties": {
+        "always": { "type": "boolean" },
+        "worker": { "type": "boolean" },
+        "baseCamp": { "type": "boolean" },
+        "otomo": { "type": "boolean" },
+        "activeOtomo": { "type": "boolean" },
+        "reserve": { "type": "boolean" },
+        "riding": { "type": "boolean" }
+      }
+    },
+    "effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "value", "target"],
+      "properties": {
+        "type": { "type": "string", "minLength": 1 },
+        "value": { "type": "number" },
+        "target": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

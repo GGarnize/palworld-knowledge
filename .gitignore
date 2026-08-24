@@ -1,0 +1,30 @@
+# Game assets / extracted raw data
+*.pak
+*.ucas
+*.utoc
+*.usmap
+
+# Server / binaries
+*.exe
+*.dll
+*.so
+steamcmd/
+steamapps/
+PalServer/
+
+# .NET
+**/bin/
+**/obj/
+.vs/
+
+# Temporary extraction / diagnostics
+inspect-*.txt
+probe-*.json
+*-raw.json
+*-raw-*.json
+
+# OS / IDE
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

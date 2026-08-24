@@ -1,0 +1,209 @@
+name: Update Palworld data
+
+# Automatically refreshes data/*.json when the Palworld Dedicated Server
+# (Steam app 2394010) publishes a new build.
+#
+# All paths below are relative to this repo's root. The .NET solution lives
+# under extractor/ (extractor/PalworldAtlas.slnx, extractor/src, extractor/
+# tests) - data/, schemas/, config/ and scripts/ are top-level siblings.
+#
+# MAPPINGS: deliberately no --mappings anywhere in this workflow. The Linux
+# Dedicated Server depot (2394012) was downloaded and tested directly against
+# every normalize-* command with no .usmap, producing output byte-identical
+# to the previously published data/*.json. If a future build breaks that,
+# the affected normalize-* call fails loudly and this workflow fails with
+# it - there is no silent mappings fallback.
+#
+# RUNTIME EVIDENCE: config/runtime-evidence.json is hand-captured via UE4SS
+# and cannot be regenerated in CI. It carries an "evidenceFor.steamBuildId"
+# field recording which build it was captured against (null if that can't be
+# proven). scripts/normalize-all.sh only passes --runtime-evidence through
+# to normalize-game-settings when that field matches the build currently
+# being processed; otherwise it's skipped (with a loud warning), and
+# game-settings.json simply omits its 'transport' section - the same
+# graceful-degradation path normalize-game-settings already has for "no
+# --runtime-evidence supplied". Nothing here re-derives or invents runtime
+# values.
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Regenerate even if the Steam build ID is unchanged
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    - cron: "23 */6 * * *"
+
+concurrency:
+  group: palworld-data-update
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Build and test extractor
+        run: |
+          dotnet build extractor/PalworldAtlas.slnx --configuration Release
+          dotnet test extractor/PalworldAtlas.slnx --configuration Release --no-build
+
+      - name: Install SteamCMD
+        run: scripts/install-steamcmd.sh "$RUNNER_TEMP/steamcmd"
+
+      - name: Check current Steam build
+        id: build
+        env:
+          FORCE_INPUT: ${{ inputs.force }}
+        run: |
+          build_id="$(scripts/query-build-id.sh "$RUNNER_TEMP/steamcmd/steamcmd.sh")"
+          test -n "$build_id"
+
+          published_id=""
+          if [ -f data/build.json ]; then
+            published_id="$(jq -r '.steamBuildId // empty' data/build.json)"
+          fi
+
+          changed=true
+          if [ "${FORCE_INPUT:-false}" != "true" ] && [ -n "$published_id" ] && [ "$build_id" = "$published_id" ]; then
+            changed=false
+          fi
+
+          echo "Steam build ID: $build_id (currently published: ${published_id:-none})"
+          echo "id=$build_id" >> "$GITHUB_OUTPUT"
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
+          {
+            echo "### Palworld data update"
+            echo "- Steam build ID: \`$build_id\`"
+            echo "- Currently published build ID: \`${published_id:-none}\`"
+            echo "- Action: $([ "$changed" = "true" ] && echo 'refreshing data' || echo 'build unchanged, nothing to do')"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Download Linux dedicated server
+        if: steps.build.outputs.changed == 'true'
+        run: scripts/download-server.sh "$RUNNER_TEMP/steamcmd/steamcmd.sh" "$RUNNER_TEMP/palworld-server"
+
+      - name: Probe (no mappings)
+        if: steps.build.outputs.changed == 'true'
+        run: |
+          dotnet run --project extractor/src/PalworldAtlas.Extractor --configuration Release --no-build -- \
+            probe \
+            --pak-dir "$RUNNER_TEMP/palworld-server/Pal/Content/Paks" \
+            --output "$RUNNER_TEMP/probe-report.json" \
+            --build-id "${{ steps.build.outputs.id }}"
+
+      - name: Normalize datasets to staging
+        if: steps.build.outputs.changed == 'true'
+        run: |
+          mkdir -p "$RUNNER_TEMP/staging"
+          scripts/normalize-all.sh \
+            extractor/src/PalworldAtlas.Extractor \
+            "$RUNNER_TEMP/palworld-server/Pal/Content/Paks" \
+            "$RUNNER_TEMP/staging" \
+            "${{ steps.build.outputs.id }}" \
+            config/runtime-evidence.json
+
+      - name: Report localization coverage
+        if: steps.build.outputs.changed == 'true'
+        run: |
+          {
+            echo "#### Localization coverage (staged)"
+            echo '```'
+            echo "pals.json:           $(jq '[.[] | select(.name.ptBR != null)] | length' "$RUNNER_TEMP/staging/pals.json")/$(jq 'length' "$RUNNER_TEMP/staging/pals.json") with PT-BR, $(jq '[.[] | select(.name.enUS != null)] | length' "$RUNNER_TEMP/staging/pals.json")/$(jq 'length' "$RUNNER_TEMP/staging/pals.json") with EN"
+            echo "passive-skills.json: $(jq '[.[] | select(.name.ptBR != null)] | length' "$RUNNER_TEMP/staging/passive-skills.json")/$(jq 'length' "$RUNNER_TEMP/staging/passive-skills.json") with PT-BR, $(jq '[.[] | select(.name.enUS != null)] | length' "$RUNNER_TEMP/staging/passive-skills.json")/$(jq 'length' "$RUNNER_TEMP/staging/passive-skills.json") with EN"
+            echo '```'
+            echo "These numbers come from the Linux Dedicated Server package itself - no wiki/site lookup, no LLM translation, no reuse of a previous build's localization under a new build ID."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Validate staged data
+        if: steps.build.outputs.changed == 'true'
+        run: |
+          dotnet run --project extractor/src/PalworldAtlas.Extractor --configuration Release --no-build -- \
+            validate-data \
+            --data-dir "$RUNNER_TEMP/staging" \
+            --schema-dir schemas
+
+      - name: Preserve previous build metadata
+        if: steps.build.outputs.changed == 'true'
+        run: |
+          if [ -f data/build.json ]; then
+            cp data/build.json "$RUNNER_TEMP/previous-build.json"
+          fi
+
+      - name: Build staged metadata
+        if: steps.build.outputs.changed == 'true'
+        run: |
+          previous_args=()
+          if [ -f "$RUNNER_TEMP/previous-build.json" ]; then
+            previous_args=(--previous-build "$RUNNER_TEMP/previous-build.json")
+          fi
+
+          # --game-version is intentionally omitted: the Linux Dedicated
+          # Server package carries no reliable human-readable version string
+          # (verified locally - only the Steam build ID is available), and
+          # this pipeline does not invent one or fetch it from the web.
+          dotnet run --project extractor/src/PalworldAtlas.Extractor --configuration Release --no-build -- \
+            build-metadata \
+            --data-dir "$RUNNER_TEMP/staging" \
+            --schema-dir schemas \
+            --build-id "${{ steps.build.outputs.id }}" \
+            --output "$RUNNER_TEMP/staging/build.json" \
+            "${previous_args[@]}" | tee "$RUNNER_TEMP/build-metadata.log"
+
+      - name: Promote staged data
+        if: steps.build.outputs.changed == 'true'
+        run: scripts/promote-staging.sh "$RUNNER_TEMP/staging" data
+
+      - name: Show diff summary
+        if: steps.build.outputs.changed == 'true'
+        run: |
+          {
+            echo "#### Files changed in data/"
+            git --no-pager diff --stat -- data || true
+            echo
+            echo "#### validate-data / build comparison summary"
+            echo '```json'
+            jq '{validation, previousBuildComparison}' data/build.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit updated data
+        if: steps.build.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "Staged data is byte-identical to what's already committed (build ID changed but content didn't) - skipping commit." >> "$GITHUB_STEP_SUMMARY"
+          else
+            git commit -m "data: update Palworld build ${{ steps.build.outputs.id }}"
+            git push
+          fi
+
+      - name: Upload diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: palworld-data-update-diagnostics-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/probe-report.json
+            ${{ runner.temp }}/staging/*.json
+            ${{ runner.temp }}/build-metadata.log
+          if-no-files-found: ignore
+          retention-days: 14

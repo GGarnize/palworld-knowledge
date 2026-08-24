@@ -1,0 +1,62 @@
+[
+  {
+    "id": "TestPassive1",
+    "localization": { "nameId": "PASSIVE_TestPassive1", "descriptionId": "PASSIVE_TestPassive1" },
+    "name": { "ptBR": "Teste 1", "enUS": "Test 1" },
+    "description": {},
+    "category": "SortDisplayable",
+    "rank": 1,
+    "lotteryWeight": 100,
+    "availability": {
+      "pal": true,
+      "rarePal": false,
+      "mutationPal": false,
+      "worldTreePal": false,
+      "accessory": false,
+      "armor": false,
+      "meleeWeapon": false,
+      "shotWeapon": false
+    },
+    "activation": {
+      "always": true,
+      "worker": false,
+      "baseCamp": false,
+      "otomo": false,
+      "activeOtomo": false,
+      "reserve": false,
+      "riding": false
+    },
+    "stackablePartnerSkillBySameTribe": false,
+    "effects": [{ "type": "Defense", "value": 10, "target": "ToSelf" }]
+  },
+  {
+    "id": "TestPassive2",
+    "localization": { "nameId": "PASSIVE_TestPassive2", "descriptionId": "PASSIVE_TestPassive2" },
+    "name": {},
+    "description": {},
+    "category": "SortNotDisplayable",
+    "rank": 1,
+    "lotteryWeight": 100,
+    "availability": {
+      "pal": false,
+      "rarePal": false,
+      "mutationPal": false,
+      "worldTreePal": false,
+      "accessory": false,
+      "armor": false,
+      "meleeWeapon": false,
+      "shotWeapon": false
+    },
+    "activation": {
+      "always": false,
+      "worker": true,
+      "baseCamp": true,
+      "otomo": false,
+      "activeOtomo": false,
+      "reserve": false,
+      "riding": false
+    },
+    "stackablePartnerSkillBySameTribe": false,
+    "effects": []
+  }
+]

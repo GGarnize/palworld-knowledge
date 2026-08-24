@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://palworld-knowledge-poc/schemas/partner-skill.schema.json",
+  "title": "PartnerSkill",
+  "description": "data/partner-skills.json - array of normalized rows from DT_PartnerSkillParameter.",
+  "type": "array",
+  "items": { "$ref": "#/$defs/partnerSkill" },
+  "$defs": {
+    "partnerSkill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["palId", "restrictionItems", "ranks", "baseCampRelevant", "source"],
+      "properties": {
+        "palId": { "type": "string", "minLength": 1 },
+        "restrictionItems": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "activeSkill": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "skillName",
+            "wazaId",
+            "flags",
+            "mainValueByRank",
+            "overwriteCoolTimeByRank",
+            "overwriteEffectTimeByRank"
+          ],
+          "properties": {
+            "skillName": { "type": "string", "minLength": 1 },
+            "wazaId": { "type": "string", "minLength": 1 },
+            "flags": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "idleCostDecreaseEveryFrame",
+                "isExecSkillContinuation",
+                "isOneShotRideAction",
+                "isRidingActiveSkillNotWeapon",
+                "ridingActiveSkillNotWeaponCondition",
+                "isToggleRidingActiveSkillNotWeapon"
+              ],
+              "properties": {
+                "idleCostDecreaseEveryFrame": { "type": "boolean" },
+                "isExecSkillContinuation": { "type": "boolean" },
+                "isOneShotRideAction": { "type": "boolean" },
+                "isRidingActiveSkillNotWeapon": { "type": "boolean" },
+                "ridingActiveSkillNotWeaponCondition": { "type": "string", "minLength": 1 },
+                "isToggleRidingActiveSkillNotWeapon": { "type": "boolean" }
+              }
+            },
+            "mainValueByRank": { "type": "array", "items": { "type": "number" } },
+            "overwriteCoolTimeByRank": { "type": "array", "items": { "type": "number" } },
+            "overwriteEffectTimeByRank": { "type": "array", "items": { "type": "number" } }
+          }
+        },
+        "ranks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/rank" }
+        },
+        "baseCampRelevant": { "type": "boolean" },
+        "textReferencePassiveSkills": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          }
+        },
+        "source": { "$ref": "#/$defs/source" }
+      }
+    },
+    "rank": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rank", "passiveSkills"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1 },
+        "passiveSkills": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/passiveSkillRef" }
+        }
+      }
+    },
+    "passiveSkillRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "effects"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Empty string is only valid together with unresolved=true (the row's SkillName key could not be read)."
+        },
+        "effects": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/effect" }
+        },
+        "activation": { "$ref": "#/$defs/activation" },
+        "parameters": { "$ref": "#/$defs/parameters" },
+        "unresolved": { "type": "boolean", "const": true }
+      }
+    },
+    "activation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["always", "worker", "baseCamp", "otomo", "activeOtomo", "reserve", "riding"],
+      "properties": {
+        "always": { "type": "boolean" },
+        "worker": { "type": "boolean" },
+        "baseCamp": { "type": "boolean" },
+        "otomo": { "type": "boolean" },
+        "activeOtomo": { "type": "boolean" },
+        "reserve": { "type": "boolean" },
+        "riding": { "type": "boolean" }
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["delayTime", "assignIgnoreCurrentWorkType", "assignOthers", "notAssignSelf", "floatValue1"],
+      "properties": {
+        "delayTime": { "type": "number" },
+        "workType": { "type": "string", "minLength": 1 },
+        "assignIgnoreCurrentWorkType": { "type": "boolean" },
+        "mapObjectIds": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "itemIds": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "assignOthers": { "type": "boolean" },
+        "targetElementType": { "type": "string", "minLength": 1 },
+        "palTribeIds": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "notAssignSelf": { "type": "boolean" },
+        "floatValue1": { "type": "number" },
+        "trigger": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["targetTribeIds"],
+          "properties": {
+            "targetTribeIds": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+          }
+        },
+        "item": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["containNoItemId", "meleeOnly"],
+          "properties": {
+            "itemTypeA": { "type": "string", "minLength": 1 },
+            "itemTypeB": { "type": "string", "minLength": 1 },
+            "itemIds": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "excludedItemIds": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "containNoItemId": { "type": "boolean" },
+            "weaponType": { "type": "string", "minLength": 1 },
+            "weaponTypes": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "meleeOnly": { "type": "boolean" }
+          }
+        },
+        "regeneInterval": { "type": "integer" },
+        "otherOtomoCondition": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "targetElementType": { "type": "string", "minLength": 1 },
+            "targetElementTypes": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "palTribeIds": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+          }
+        }
+      }
+    },
+    "effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "value", "target"],
+      "properties": {
+        "type": { "type": "string", "minLength": 1 },
+        "value": { "type": "number" },
+        "target": { "type": "string", "minLength": 1 }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["table", "row"],
+      "properties": {
+        "table": { "type": "string", "minLength": 1 },
+        "row": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
