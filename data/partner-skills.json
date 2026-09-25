@@ -32794,7 +32794,7 @@
             "parameters": {
               "delayTime": 0,
               "assignIgnoreCurrentWorkType": false,
-              "assignOthers": false,
+              "assignOthers": true,
               "notAssignSelf": false,
               "floatValue1": 0,
               "item": {
@@ -32835,7 +32835,7 @@
             "parameters": {
               "delayTime": 0,
               "assignIgnoreCurrentWorkType": false,
-              "assignOthers": false,
+              "assignOthers": true,
               "notAssignSelf": false,
               "floatValue1": 0,
               "item": {
@@ -32876,7 +32876,7 @@
             "parameters": {
               "delayTime": 0,
               "assignIgnoreCurrentWorkType": false,
-              "assignOthers": false,
+              "assignOthers": true,
               "notAssignSelf": false,
               "floatValue1": 0,
               "item": {
@@ -32917,7 +32917,7 @@
             "parameters": {
               "delayTime": 0,
               "assignIgnoreCurrentWorkType": false,
-              "assignOthers": false,
+              "assignOthers": true,
               "notAssignSelf": false,
               "floatValue1": 0,
               "item": {
@@ -32958,7 +32958,7 @@
             "parameters": {
               "delayTime": 0,
               "assignIgnoreCurrentWorkType": false,
-              "assignOthers": false,
+              "assignOthers": true,
               "notAssignSelf": false,
               "floatValue1": 0,
               "item": {
@@ -78204,7 +78204,7 @@
             "parameters": {
               "delayTime": 0,
               "assignIgnoreCurrentWorkType": false,
-              "assignOthers": false,
+              "assignOthers": true,
               "notAssignSelf": false,
               "floatValue1": 0,
               "item": {
@@ -78245,7 +78245,7 @@
             "parameters": {
               "delayTime": 0,
               "assignIgnoreCurrentWorkType": false,
-              "assignOthers": false,
+              "assignOthers": true,
               "notAssignSelf": false,
               "floatValue1": 0,
               "item": {
@@ -78286,7 +78286,7 @@
             "parameters": {
               "delayTime": 0,
               "assignIgnoreCurrentWorkType": false,
-              "assignOthers": false,
+              "assignOthers": true,
               "notAssignSelf": false,
               "floatValue1": 0,
               "item": {
@@ -78327,7 +78327,7 @@
             "parameters": {
               "delayTime": 0,
               "assignIgnoreCurrentWorkType": false,
-              "assignOthers": false,
+              "assignOthers": true,
               "notAssignSelf": false,
               "floatValue1": 0,
               "item": {
@@ -78368,7 +78368,7 @@
             "parameters": {
               "delayTime": 0,
               "assignIgnoreCurrentWorkType": false,
-              "assignOthers": false,
+              "assignOthers": true,
               "notAssignSelf": false,
               "floatValue1": 0,
               "item": {

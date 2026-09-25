@@ -7177,7 +7177,7 @@
       {
         "type": "Defense",
         "value": 15,
-        "target": "None"
+        "target": "ToSelf"
       },
       {
         "type": "CraftSpeed",
@@ -7303,7 +7303,7 @@
     },
     "description": {
       "ptBR": "Aumenta o dano de ataques de fogo em {EffectValue1}%.\r\nAumenta o dano de ataques el\u00E9tricos em {EffectValue1}%.",
-      "enUS": "{EffectValue1}% increase to Fire attack damage.\r\n{EffectValue1}% increase to Lightning attack damage."
+      "enUS": "{EffectValue1}% increase in Fire attack damage\r\n{EffectValue1}% increase in Lightning attack damage"
     },
     "category": "SortDisplayable",
     "rank": 4,
@@ -22700,7 +22700,7 @@
     },
     "description": {
       "ptBR": "F\u00F4lego m\u00E1ximo \u002B{EffectValue1}%\r\n*S\u00F3 funciona com Pals que servem de montaria",
-      "enUS": "Max stamina \u002B{EffectValue1}%\r\n*This effect is only valid for rideable pals."
+      "enUS": "Max Stamina \u002B{EffectValue1}%\r\n*This effect is only valid for rideable pals."
     },
     "category": "SortDisplayable",
     "rank": 3,
@@ -22745,7 +22745,7 @@
     },
     "description": {
       "ptBR": "F\u00F4lego m\u00E1ximo \u002B{EffectValue1}%\r\n*S\u00F3 funciona com Pals que servem de montaria",
-      "enUS": "Max stamina \u002B{EffectValue1}%\r\n*This effect is only valid for rideable pals."
+      "enUS": "Max Stamina \u002B{EffectValue1}%\r\n*This effect is only valid for rideable pals."
     },
     "category": "SortDisplayable",
     "rank": 1,
@@ -22790,7 +22790,7 @@
     },
     "description": {
       "ptBR": "F\u00F4lego m\u00E1ximo \u002B{EffectValue1}%\r\n*S\u00F3 funciona com Pals que servem de montaria",
-      "enUS": "Max stamina \u002B{EffectValue1}%\r\n*This effect is only valid for rideable pals."
+      "enUS": "Max Stamina \u002B{EffectValue1}%\r\n*This effect is only valid for rideable pals."
     },
     "category": "SortDisplayable",
     "rank": 4,
@@ -22980,7 +22980,7 @@
     },
     "description": {
       "ptBR": "Pre\u00E7o de venda piorado: -{EffectValue1}%",
-      "enUS": "Decrease the value of items when sold by {EffectValue1}%"
+      "enUS": "Decreases the value of items when sold by {EffectValue1}%"
     },
     "category": "SortDisplayable",
     "rank": -1,
@@ -35015,7 +35015,7 @@
     },
     "description": {
       "ptBR": "Aumenta o dano de ataques de \u00E1gua em {EffectValue1}%.\r\nAumenta o dano de ataques de gelo em {EffectValue1}%.\r\nAumenta a defesa em {EffectValue1}%.",
-      "enUS": "{EffectValue1}% increase to Water attack damage \r\n{EffectValue1}% increase to Ice attack damage \r\n{EffectValue1}% increase to defense."
+      "enUS": "{EffectValue1}% increase in Water attack damage \r\n{EffectValue1}% increase in Ice attack damage \r\nDefense \u002B{EffectValue1}%"
     },
     "category": "SortDisplayable",
     "rank": 4,
@@ -44177,7 +44177,7 @@
     },
     "description": {
       "ptBR": "Manuten\u00E7\u00E3o de SAN \u003CNumBlue_13\u003E\u002B50%\u003C/\u003E\r\nVelocidade de trabalho {EffectValue2}\u003CNumRed_13\u003E%\u003C/\u003E\r\nEvita que madeira ou rochas da \u00C1rvore Mundial desapare\u00E7am ao se aproximar",
-      "enUS": "SAN depletion rate -\u003CNumBlue_13\u003E50.0%\u003C/\u003E\r\nWork Speed {EffectValue2}\u003CNumRed_13\u003E%\u003C/\u003E\r\nWorld Tree resources will not vanish when approached."
+      "enUS": "SAN drops \u003CNumBlue_13\u003E\u002B50.0%\u003C/\u003E slower.\r\nWork Speed {EffectValue2}\u003CNumRed_13\u003E%\u003C/\u003E\r\nWorld Tree resources will not vanish when approached."
     },
     "category": "SortDisplayable",
     "rank": 5,
@@ -44347,7 +44347,7 @@
     },
     "description": {
       "ptBR": "Aumenta o dano de ataques de \u00E1gua em {EffectValue1}%.\r\nAumenta o dano de ataques de gelo em {EffectValue1}%.\r\nAumenta a defesa em {EffectValue1}%.",
-      "enUS": "{EffectValue1}% increase to Water attack damage \r\n{EffectValue1}% increase to Ice attack damage \r\n{EffectValue1}% increase to defense."
+      "enUS": "{EffectValue1}% increase in Water attack damage \r\n{EffectValue1}% increase in Ice attack damage \r\nDefense \u002B{EffectValue1}%"
     },
     "category": "SortDisplayable",
     "rank": 3,
@@ -47551,10 +47551,10 @@
       "shotWeapon": false
     },
     "activation": {
-      "always": false,
+      "always": true,
       "worker": false,
       "baseCamp": false,
-      "otomo": true,
+      "otomo": false,
       "activeOtomo": false,
       "reserve": false,
       "riding": false
@@ -68650,7 +68650,7 @@
     },
     "description": {
       "ptBR": "Absorve {EffectValue1}% do dano causado para restaurar PV.\r\nCura autom\u00E1tica de PV do Pal \u002B{EffectValue2}%\r\nAtaque \u002B{EffectValue3}%",
-      "enUS": "Absorbs {EffectValue2}% of damage dealt and restores Health.\r\nPal Auto Health Regeneration Rate \u002B{EffectValue2}%.\r\nAttack \u002B{EffectValue3}%."
+      "enUS": "Absorbs {EffectValue1}% of damage dealt and restores Health.\r\nPal Auto Health Regeneration Rate \u002B{EffectValue2}%.\r\nAttack \u002B{EffectValue3}%."
     },
     "category": "SortDisplayable",
     "rank": 4,

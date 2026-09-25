@@ -14959,13 +14959,13 @@
       "nocturnal": false
     },
     "movement": {
-      "slowWalkSpeed": -1,
-      "walkSpeed": -1,
-      "runSpeed": -1,
-      "transportSpeed": -1,
-      "rideSprintSpeed": -1,
-      "swimSpeed": -1,
-      "swimDashSpeed": -1
+      "slowWalkSpeed": 100,
+      "walkSpeed": 200,
+      "runSpeed": 350,
+      "transportSpeed": 280,
+      "rideSprintSpeed": 500,
+      "swimSpeed": 350,
+      "swimDashSpeed": 350
     },
     "bestWorkSuitability": "Cool",
     "workSuitability": {
@@ -15147,13 +15147,13 @@
       "nocturnal": true
     },
     "movement": {
-      "slowWalkSpeed": -1,
-      "walkSpeed": -1,
-      "runSpeed": -1,
-      "transportSpeed": -1,
-      "rideSprintSpeed": -1,
-      "swimSpeed": -1,
-      "swimDashSpeed": -1
+      "slowWalkSpeed": 100,
+      "walkSpeed": 200,
+      "runSpeed": 450,
+      "transportSpeed": 250,
+      "rideSprintSpeed": 600,
+      "swimSpeed": 135,
+      "swimDashSpeed": 135
     },
     "bestWorkSuitability": "ProductMedicine",
     "workSuitability": {
@@ -15198,8 +15198,8 @@
       "runSpeed": 600,
       "transportSpeed": 100,
       "rideSprintSpeed": 700,
-      "swimSpeed": 600,
-      "swimDashSpeed": 600
+      "swimSpeed": 180,
+      "swimDashSpeed": 210
     },
     "bestWorkSuitability": "Handcraft",
     "workSuitability": {
@@ -15236,13 +15236,13 @@
       "nocturnal": true
     },
     "movement": {
-      "slowWalkSpeed": -1,
-      "walkSpeed": -1,
-      "runSpeed": -1,
+      "slowWalkSpeed": 20,
+      "walkSpeed": 110,
+      "runSpeed": 260,
       "transportSpeed": -1,
       "rideSprintSpeed": -1,
-      "swimSpeed": -1,
-      "swimDashSpeed": -1
+      "swimSpeed": 260,
+      "swimDashSpeed": 260
     },
     "bestWorkSuitability": "ProductMedicine",
     "workSuitability": {
@@ -33226,8 +33226,8 @@
       "runSpeed": 600,
       "transportSpeed": 100,
       "rideSprintSpeed": 700,
-      "swimSpeed": 600,
-      "swimDashSpeed": 600
+      "swimSpeed": 180,
+      "swimDashSpeed": 210
     },
     "bestWorkSuitability": "Handcraft",
     "workSuitability": {
@@ -33356,13 +33356,13 @@
       "nocturnal": false
     },
     "movement": {
-      "slowWalkSpeed": -1,
-      "walkSpeed": -1,
-      "runSpeed": -1,
-      "transportSpeed": -1,
-      "rideSprintSpeed": -1,
-      "swimSpeed": -1,
-      "swimDashSpeed": -1
+      "slowWalkSpeed": 100,
+      "walkSpeed": 200,
+      "runSpeed": 350,
+      "transportSpeed": 280,
+      "rideSprintSpeed": 500,
+      "swimSpeed": 350,
+      "swimDashSpeed": 350
     },
     "bestWorkSuitability": "Cool",
     "workSuitability": {
@@ -33545,13 +33545,13 @@
       "nocturnal": true
     },
     "movement": {
-      "slowWalkSpeed": -1,
-      "walkSpeed": -1,
-      "runSpeed": -1,
-      "transportSpeed": -1,
-      "rideSprintSpeed": -1,
-      "swimSpeed": -1,
-      "swimDashSpeed": -1
+      "slowWalkSpeed": 50,
+      "walkSpeed": 100,
+      "runSpeed": 450,
+      "transportSpeed": 250,
+      "rideSprintSpeed": 600,
+      "swimSpeed": 135,
+      "swimDashSpeed": 135
     },
     "bestWorkSuitability": "ProductMedicine",
     "workSuitability": {
@@ -33588,13 +33588,13 @@
       "nocturnal": true
     },
     "movement": {
-      "slowWalkSpeed": -1,
-      "walkSpeed": -1,
-      "runSpeed": -1,
+      "slowWalkSpeed": 20,
+      "walkSpeed": 110,
+      "runSpeed": 260,
       "transportSpeed": -1,
       "rideSprintSpeed": -1,
-      "swimSpeed": -1,
-      "swimDashSpeed": -1
+      "swimSpeed": 260,
+      "swimDashSpeed": 260
     },
     "bestWorkSuitability": "ProductMedicine",
     "workSuitability": {
@@ -34919,7 +34919,9 @@
     "workSuitability": {
       "Collection": 1
     },
-    "naturalPassives": [],
+    "naturalPassives": [
+      "Nocturnal"
+    ],
     "source": {
       "table": "DT_PalMonsterParameter",
       "row": "PREDATOR_Garm_Quest"
@@ -34967,7 +34969,7 @@
       "Transport": 2
     },
     "naturalPassives": [
-      "ElementResist_Normal_1_PAL"
+      "Nocturnal"
     ],
     "source": {
       "table": "DT_PalMonsterParameter",
@@ -35012,7 +35014,9 @@
     "workSuitability": {
       "EmitFlame": 7
     },
-    "naturalPassives": [],
+    "naturalPassives": [
+      "Nocturnal"
+    ],
     "source": {
       "table": "DT_PalMonsterParameter",
       "row": "PREDATOR_Umihebi_Fire_Quest"
@@ -35057,7 +35061,9 @@
     "workSuitability": {
       "EmitFlame": 4
     },
-    "naturalPassives": [],
+    "naturalPassives": [
+      "Nocturnal"
+    ],
     "source": {
       "table": "DT_PalMonsterParameter",
       "row": "AmaterasuWolf_Dark_Quest_Friend"
@@ -35102,7 +35108,9 @@
     "workSuitability": {
       "EmitFlame": 4
     },
-    "naturalPassives": [],
+    "naturalPassives": [
+      "Nocturnal"
+    ],
     "source": {
       "table": "DT_PalMonsterParameter",
       "row": "AmaterasuWolf_Dark_Quest_Enemy"

@@ -1,40 +1,39 @@
 {
-  "steamBuildId": "18471077",
-  "gameVersion": "1.0.3.101283",
-  "generatedAtUtc": "2026-08-24T17:13:14.3266359Z",
+  "steamBuildId": "25247047",
+  "generatedAtUtc": "2026-09-25T21:41:56.9129535Z",
   "extractor": {
     "name": "PalworldAtlas.Extractor",
-    "version": "1.0.0\u002Badd14423f623c45836ed31f4a180c2adfa8b0ab7"
+    "version": "1.0.0\u002B3514681a476b9faa0c364094755c9211df1cf814"
   },
   "datasets": {
     "pals": {
       "file": "pals.json",
       "rows": 753,
-      "sha256": "0b70a165c2758cf532890e175bec38f2d6b108b64173f6e028ad1dfd49c22bce"
+      "sha256": "ddcec6fae238b395ba0ae023a96d71f101d5e4971eb97864b59088467034f6ce"
     },
     "passiveSkills": {
       "file": "passive-skills.json",
       "rows": 1905,
-      "sha256": "9cf0f5a35fb9d7874caa27305c9f3ce7a0e71b727858095308c8ccc84f654255"
+      "sha256": "801ca9e613094de6502bb6a7378d26f9929fb52147240f6790abab2eb1a39f2e"
     },
     "partnerSkills": {
       "file": "partner-skills.json",
       "rows": 682,
-      "sha256": "80e217599b4ed8a06f92e4fbd382357f97532fc55e71a9b986e0aa06162c632f"
+      "sha256": "10cb7566ba6c8665f5eaaeedf361c9d0b5c76078fcade047c02d2e23b1c607b1"
     },
     "gameSettings": {
       "file": "game-settings.json",
-      "sha256": "1b136b379975def619ab62d34c249286b37e722493a9b052aae0890790e0b495"
+      "sha256": "3824e7bb27f186a4de8cf8bf529ec71b3a211ab6685d7cf664a538596ddeb80f"
     }
   },
   "validation": {
     "errors": 0,
-    "warnings": 78
+    "warnings": 79
   },
   "previousBuildComparison": {
     "available": true,
     "previousBuildId": "18471077",
-    "previousGeneratedAtUtc": "2026-08-24T17:05:33.4456809Z",
+    "previousGeneratedAtUtc": "2026-08-24T17:13:14.3266359Z",
     "datasets": {
       "pals": {
         "available": true,
@@ -42,7 +41,7 @@
         "currentRows": 753,
         "delta": 0,
         "deltaPercent": 0,
-        "hashChanged": false
+        "hashChanged": true
       },
       "passiveSkills": {
         "available": true,
@@ -50,7 +49,7 @@
         "currentRows": 1905,
         "delta": 0,
         "deltaPercent": 0,
-        "hashChanged": false
+        "hashChanged": true
       },
       "partnerSkills": {
         "available": true,
@@ -58,14 +57,19 @@
         "currentRows": 682,
         "delta": 0,
         "deltaPercent": 0,
-        "hashChanged": false
+        "hashChanged": true
       },
       "gameSettings": {
         "available": true,
-        "hashChanged": false
+        "hashChanged": true
       }
     },
-    "changedDatasets": [],
+    "changedDatasets": [
+      "pals",
+      "passiveSkills",
+      "partnerSkills",
+      "gameSettings"
+    ],
     "riskWarnings": []
   }
 }

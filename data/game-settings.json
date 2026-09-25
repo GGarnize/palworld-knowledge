@@ -232,23 +232,7 @@
       }
     }
   },
-  "transport": {
-    "globalSpeedRate": 0.5,
-    "globalSpeedRateSourceKind": "runtime-cdo",
-    "globalSpeedRateSource": "/Script/Pal.Default__PalGameSetting",
-    "baseSpeedTypeEvidence": {
-      "value": "Run",
-      "enumValue": 2,
-      "sourceKind": "debug-runtime-cdo",
-      "source": "/Script/Pal.Default__PalDebugSetting",
-      "confidence": "high",
-      "note": "Developer transport validation setting; runtime formula body not decompiled. Evidence only, not proof of the WorkTransportingSpeedRate formula."
-    },
-    "debugConfirmationSpeedMultipleRate": 1,
-    "debugConfirmationSpeedMultipleRateSourceKind": "debug-runtime-cdo"
-  },
   "runtimeEvidence": {
-    "applied": true,
-    "file": "C:\\Repos\\palworld-knowledge-poc\\config\\runtime-evidence.json"
+    "applied": false
   }
 }
